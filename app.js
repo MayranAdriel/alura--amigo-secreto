@@ -18,18 +18,31 @@ botaoAdicionar.addEventListener("click", () => {
         })
     }
     else {
-        avisoInputInvalido();
+        const mensagem = "Por favor insira um nome válido!"
+        aviso();
     }
 });
 
 botaoSortear.addEventListener("click", () => {
-    const amigoSorteado = sorteiaAmigo(listaDeAmigos);
-    const mensagem = `O amigo secreto sorteado é: ${amigoSorteado}`
-    resultado.textContent = mensagem;
+    if (listaDeAmigos.length > 0) {
+        const amigoSorteado = sorteiaAmigo(listaDeAmigos);
+        resetaSorteio();
+        const mensagem = `O amigo secreto sorteado é: ${amigoSorteado}`
+        resultado.textContent = mensagem;
+    }
+    else {
+        const mensagemAviso = "A lista está vazia! Por favor insira pelo menos um nome";
+        aviso(mensagemAviso);
+    }
 })
 
-const avisoInputInvalido = () => {
-    const mensagem = "Por favor insira um nome válido!"
+const resetaSorteio = () => {
+    listaDeNomes.innerHTML = "";
+    listaDeAmigos = [];
+}
+
+
+const aviso = (mensagem) => {
     alert(mensagem)
 }
 
